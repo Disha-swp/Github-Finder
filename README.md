@@ -3,3 +3,4 @@
 3. with github api
 4. with each keyup username would be searched
 5. after username is found view profile button could be accessed and directed to the github profile(pf the entered username)
+6. if invalid username is given msg is displayed" not found" and "view profile" button is not shown
