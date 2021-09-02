@@ -4,4 +4,7 @@
 .card{
   align-items: center;
 }
+button.btn.btn-success {
+  margin-bottom: 10px;
+}
 

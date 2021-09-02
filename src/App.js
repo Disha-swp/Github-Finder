@@ -20,8 +20,14 @@ useEffect(() => {
   fetch(`https://api.github.com/users/${userInput}`)
     .then(res => res.json())
     .then(value => {
+      if(value.message){
+        setError(value.message);
+      }
+      else{
       // console.log(value);
       setData(value);
+      setError(null);
+      }
     })
   }, [userInput]);
   const handleSearch = (e) => {
@@ -56,6 +62,7 @@ useEffect(() => {
 
   return (
     <div className="App">
+     
     <Navbar bg="dark" variant="dark">
     <Container>
     <Navbar.Brand >GitHub User Finder</Navbar.Brand>
@@ -64,16 +71,12 @@ useEffect(() => {
       <div className="searchBlock">
         <h3>Enter Username</h3>
         <input type = "text" id="searchUser" placeholder="Username"
-         onChange ={handleSearch}/> 
-         <a href = {htmlurl} target="_blank" 
-          rel = "noopener noreferrer" >
-               <Button variant="success" type = "submit">View Profile
-               </Button>
-          </a>
+         onChange ={handleSearch}/> &nbsp;
+         
         
       </div>
       <div className="card">
-      <Card style={{ width: '18rem' }}>
+      { error ? (<h1> {error} </h1>) :(<Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={avatar} />
         <Card.Body>
           <Card.Title>{username}</Card.Title>
@@ -81,8 +84,15 @@ useEffect(() => {
           <Card.Text>Followers: {followers}</Card.Text>
           <Card.Text>repos: {repository}</Card.Text>
           <Card.Text>Following: {following}</Card.Text>
+          <a href = {htmlurl} target="_blank" 
+          rel = "noopener noreferrer" >
+               <Button variant="success" type = "submit">View Profile
+               </Button>
+          </a>
         </Card.Body>
-      </Card>
+      </Card>) 
+      }
+      
       </div>
     </div>
     
